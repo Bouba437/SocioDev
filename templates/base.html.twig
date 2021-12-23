@@ -2,9 +2,11 @@
 <html>
     <head>
         <meta charset="UTF-8">
-        <title>{% block title %}Welcome!{% endblock %}</title>
+        <title>{% block title %}Accueil{% endblock %} - Sociodev</title>
         {# Run `composer require symfony/webpack-encore-bundle`
            and uncomment the following Encore helpers to start using Symfony UX #}
+        <link rel="stylesheet" href="../css/bootstrap.min.css">
+        <link rel="stylesheet" href="../css/app.css">
         {% block stylesheets %}
             {#{{ encore_entry_link_tags('app') }}#}
         {% endblock %}
@@ -14,6 +16,12 @@
         {% endblock %}
     </head>
     <body>
+        {% include "partials/navbar.html.twig" %}
+        
+        {% include "partials/flashes.html.twig" %}
+
         {% block body %}{% endblock %}
+
+        <script src="../js/bootstrap.min.js"></script>
     </body>
 </html>

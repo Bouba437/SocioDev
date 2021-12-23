@@ -1,0 +1,9 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{user.fullName}}{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Profil de {{user.fullName}}</h1>
+    </div>
+{% endblock %}
