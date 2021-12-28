@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\KeywordRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=KeywordRepository::class)
+ * @ORM\HasLifecycleCallbacks
  */
 class Keyword
 {
@@ -38,6 +40,21 @@ class Keyword
      * @ORM\ManyToMany(targetEntity=Article::class, mappedBy="keywords")
      */
     private $articles;
+
+    public function __toString()
+    {
+        return $this->name;
+    }
+
+    /**
+     * Permet d'initialiser la date de création d'un mot-clé
+     * 
+     * @ORM\PrePersist
+     *
+     */
+    public function setCreatedAtValue() {
+        $this->createdAt = new DateTime();
+    }
 
     public function __construct()
     {

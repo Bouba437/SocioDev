@@ -11,13 +11,21 @@
           <a class="nav-link" href="{{ path('home') }}">Accueil</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="{{ path('home') }}">Blog</a>
+          <a class="nav-link" href="{{ path('articles_index') }}">Blog</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ path('home') }}">Nos services</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="{{ path('home') }}">Contact</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Catégories</a>
+          <div class="dropdown-menu">
+            {% for category in categories.getCategories %}
+              <a class="dropdown-item" href="{{ path('category_show', {'slug': category.slug}) }}">{{category.name}}</a>
+            {% endfor %}
+          </div>
         </li>
       </ul>
       <ul class="navbar-nav">

@@ -5,5 +5,8 @@
 {% block body %}
     <div class="container">
         <h1>Je suis la page d'accueil</h1>
+        <p>
+            La personne est adulte : {{adulte | booleanBadge({'trueText': 'Adulte', 'falseText': 'Enfant'})}}
+        </p>
     </div>
 {% endblock %}

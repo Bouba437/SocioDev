@@ -1,0 +1,15 @@
+<div class="card bg-light mb-3">
+    <div class="card-header">
+        <small class="text-primary">
+            <i class="fas fa-clock"></i> {{article.createdAt | date('d.m.Y à h:i')}}
+            par <i class="fas fa-user"></i> {{article.author.fullName}}
+        </small>
+    </div>
+    <img src="/uploads/articles/{{ article.coverImage }}" alt="{{ article.title }}" class="card-img-top img-fluid" style="height: 200px; width: 100%; display: block;">
+    <div class="card-body">
+        <h5>{{ article.title }}</h5>
+        <a href="{{ path('article_show', {'slug': article.slug}) }}" class="btn btn-info">
+            Lire l'article
+        </a>
+    </div>
+</div>

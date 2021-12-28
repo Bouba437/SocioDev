@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégories{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <h1>Liste des catégories</h1>
+        <div class="row">
+            {% for category in categories.getCategories %}
+                <div class="col-md-4 mb-3">
+                    <div class="category-item text-center">
+                        <i class="{{category.icon}} fa-2x d-block"></i>
+                        <a href="">{{category.name}}</a>
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+{% endblock %}

@@ -3,12 +3,16 @@
 namespace App\Entity;
 
 use App\Repository\ArticleRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
+
 
 /**
  * @ORM\Entity(repositoryClass=ArticleRepository::class)
+ * @ORM\HasLifecycleCallbacks
  */
 class Article
 {
@@ -25,6 +29,7 @@ class Article
     private $title;
 
     /**
+     * @Gedmo\Slug(fields={"title","id"})
      * @ORM\Column(type="string", length=255)
      */
     private $slug;
@@ -70,6 +75,31 @@ class Article
      */
     private $categories;
 
+    /**
+     * @ORM\Column(type="boolean")
+     */
+    private $online = true;
+
+    /**
+     * Permet d'initialiser la date de création d'un article lors de sa création
+     * 
+     * @ORM\PrePersist
+     *
+     */
+    public function setCreatedAtValue() {
+        $this->createdAt = new DateTime();
+    }
+
+    /**
+     * Permet d'initialiser la date de modification d'un article
+     * 
+     * @ORM\PreUpdate
+     *
+     */
+    public function setUpdatedAtValue() {
+        $this->updatedAt = new DateTime();
+    }
+
     public function __construct()
     {
         $this->keywords = new ArrayCollection();
@@ -98,12 +128,12 @@ class Article
         return $this->slug;
     }
 
-    public function setSlug(string $slug): self
-    {
-        $this->slug = $slug;
+    // public function setSlug(string $slug): self
+    // {
+    //     $this->slug = $slug;
 
-        return $this;
-    }
+    //     return $this;
+    // }
 
     public function getDescription(): ?string
     {
@@ -221,6 +251,18 @@ class Article
     public function removeCategory(Category $category): self
     {
         $this->categories->removeElement($category);
+
+        return $this;
+    }
+
+    public function getOnline(): ?bool
+    {
+        return $this->online;
+    }
+
+    public function setOnline(bool $online): self
+    {
+        $this->online = $online;
 
         return $this;
     }

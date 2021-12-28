@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block title %}{{ article.title }}{% endblock %}
+
+
+{% block body %}
+    <div class="container m-2 mx-auto">
+        <h1>{{ article.title }}</h1>
+        {% for category in article.categories %}
+            <a href="{{ path('category_show', {'slug': category.slug}) }}">{{category.name | badge({'color': 'danger', 'rounded': true})}}</a>
+        {% endfor %}
+        <img src="/uploads/articles/{{ article.coverImage }}" alt="{{ article.title }}" class="img-fluid article-image" style="width: 100%; max-height: 350px;">
+        <br>
+        {{ article.content | raw}}
+    </div>
+{% endblock %}

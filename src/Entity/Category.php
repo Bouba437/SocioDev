@@ -3,12 +3,14 @@
 namespace App\Entity;
 
 use App\Repository\CategoryRepository;
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
  * @ORM\Entity(repositoryClass=CategoryRepository::class)
+ * @ORM\HasLifecycleCallbacks
  */
 class Category
 {
@@ -38,6 +40,26 @@ class Category
      * @ORM\ManyToMany(targetEntity=Article::class, mappedBy="categories")
      */
     private $articles;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $icon;
+
+    public function __toString()
+    {
+        return $this->getName();
+    }
+
+    /**
+     * Permet d'initialiser la date de création d'une catégorie lors de sa création
+     * 
+     * @ORM\PrePersist
+     *
+     */
+    public function setCreatedAtValue() {
+        $this->createdAt = new DateTime();
+    }
 
     public function __construct()
     {
@@ -108,6 +130,18 @@ class Category
         if ($this->articles->removeElement($article)) {
             $article->removeCategory($this);
         }
+
+        return $this;
+    }
+
+    public function getIcon(): ?string
+    {
+        return $this->icon;
+    }
+
+    public function setIcon(string $icon): self
+    {
+        $this->icon = $icon;
 
         return $this;
     }
