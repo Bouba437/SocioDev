@@ -12,5 +12,65 @@
         <img src="/uploads/articles/{{ article.coverImage }}" alt="{{ article.title }}" class="img-fluid article-image" style="width: 100%; max-height: 350px;">
         <br>
         {{ article.content | raw}}
+        <div class="my-5">
+            <h2>Commentaires :</h2>
+            {% for comment in article.comments %}
+                {% if comment.parent == null %}
+                    <div class="comment-area">
+                        <p>
+                            <small>
+                                Publié par <b>{{comment.author.fullName}}</b> le {{comment.createdAt | date("d/m/Y à H:i")}} 
+                            </small>
+                        </p>
+                        <div>
+                            {{comment.content}}
+                            <p>
+                                <a href="#add-comment" data-reply data-id="{{comment.id }}" class="">Répondre</a>
+                                {% if app.user == comment.author %}
+                                    <a href="{{ path('comment_edit', {'id': comment.id}) }}" class="ms-5">Modifier</a>
+                                {% endif %}
+                            </p>
+                            <div class="ms-5">
+                                {% for reply in comment.replies %}
+                                    <b>{{reply.author.fullName}}</b><br>
+                                    <small>{{reply.createdAt | date("d/m/Y à H:i")}}</small>
+                                    <p class="mt-2">
+                                        {{reply.content}}
+                                    </p>
+                                    {% if app.user == reply.author %}
+                                        <p><a href="{{ path('comment_edit', {'id': reply.id}) }}" class="ms-5">Modifier</a></p>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endfor %}
+        </div>
+        <div class="my-5" id="add-comment">
+            {% if app.user %}
+                <h2>Ajouter un commentaire</h2>
+                {{ form_start(commentForm) }}
+                {{ form_widget(commentForm) }}
+                <button type="submit" class="btn btn-primary">Commentez</button>
+                {{ form_end(commentForm) }}
+            {% else %}
+                <h2>Pour ajouter un commentaire, vous devez vous <a href="{{ path('account_login') }}">connecter</a></h2>
+            {% endif %}
+            
+        </div>
     </div>
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        window.onload = () => {
+            // On met un écouteur d'évènements sur tous les boutons répondre
+            document.querySelectorAll("[data-reply]").forEach(element => {
+                element.addEventListener("click", function(){
+                    document.querySelector("#comment_parentid").value = this.dataset.id;
+                });
+            });
+        }
+    </script>
 {% endblock %}

@@ -37,3 +37,9 @@ h1 {
     color: #778ca3;
     text-decoration: none;
 }
+
+.comment-area {
+    background-color: #f4f8ff;
+    padding: 20px 65px;
+    margin-top: 7px;
+}
