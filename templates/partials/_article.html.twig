@@ -5,7 +5,7 @@
             par <i class="fas fa-user"></i> {{article.author.fullName}}
         </small>
     </div>
-    <img src="/uploads/articles/{{ article.coverImage }}" alt="{{ article.title }}" class="card-img-top img-fluid" style="height: 200px; width: 100%; display: block;">
+    <img src="{{ vich_uploader_asset(article, 'imageFile') | imagine_filter('rectangle') }}" alt="{{ article.title }}">
     <div class="card-body">
         <h5>{{ article.title }}</h5>
         <a href="{{ path('article_show', {'slug': article.slug}) }}" class="btn btn-info">

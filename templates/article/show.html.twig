@@ -7,9 +7,11 @@
     <div class="container m-2 mx-auto">
         <h1>{{ article.title }}</h1>
         {% for category in article.categories %}
-            <a href="{{ path('category_show', {'slug': category.slug}) }}">{{category.name | badge({'color': 'danger', 'rounded': true})}}</a>
+            <p>
+                <a href="{{ path('category_show', {'slug': category.slug}) }}">{{category.name | badge({'color': 'info', 'rounded': true})}}</a>
+            </p>
         {% endfor %}
-        <img src="/uploads/articles/{{ article.coverImage }}" alt="{{ article.title }}" class="img-fluid article-image" style="width: 100%; max-height: 350px;">
+        <img src="{{ vich_uploader_asset(article, 'imageFile') | imagine_filter('miniature') }}" alt="{{ article.title }}">
         <br>
         {{ article.content | raw}}
         <div class="my-5">

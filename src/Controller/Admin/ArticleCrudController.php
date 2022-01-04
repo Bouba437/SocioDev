@@ -14,6 +14,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Field\TextareaField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextEditorField;
 use EasyCorp\Bundle\EasyAdminBundle\Field\TextField;
 use Symfony\Bundle\MakerBundle\Doctrine\RelationOneToMany;
+use Vich\UploaderBundle\Form\Type\VichImageType;
 
 class ArticleCrudController extends AbstractCrudController
 {
@@ -27,10 +28,14 @@ class ArticleCrudController extends AbstractCrudController
         return [
             IdField::new('id')->onlyOnIndex(),
             TextField::new('title', "Titre de l'article"),
-            ImageField::new('coverImage')
-                ->setBasePath('uploads/articles')
-                ->setUploadDir('public/uploads/articles/')
-                ->setUploadedFileNamePattern('[randomhash].[extension]'),
+            // ImageField::new('coverImage')
+            //     ->setBasePath('uploads/articles')
+            //     ->setUploadDir('public/uploads/articles/')
+            //     ->setUploadedFileNamePattern('[randomhash].[extension]'),
+            // TextareaField::new('imageFile')
+            //     ->setFormType(VichImageType::class),
+            TextField::new('imageFile')->setFormType(VichImageType::class)->hideOnIndex(),
+            ImageField::new('coverImage')->setBasePath('/uploads/articles/')->onlyOnIndex(),
             // SlugField::new('slug', "Slug (automatique)")->setTargetFieldName('title', 'id')->hideOnIndex(),
             TextField::new('description', "Le sous-titre (facultatif)")->hideOnIndex(),
             TextEditorField::new('content', "Contenu de l'article"),
