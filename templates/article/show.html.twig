@@ -32,7 +32,7 @@
                             </small>
                         </p>
                         <div>
-                            {{comment.content}}
+                            {{comment.content | raw}}
                             <p>
                                 <a href="#add-comment" data-reply data-id="{{comment.id }}" class="">Répondre</a>
                                 {% if app.user == comment.author %}
@@ -44,7 +44,7 @@
                                     <b>{{reply.author.fullName}}</b><br>
                                     <small>{{reply.createdAt | date("d/m/Y à H:i")}}</small>
                                     <p class="mt-2">
-                                        {{reply.content}}
+                                        {{reply.content | raw}}
                                     </p>
                                     {% if app.user == reply.author %}
                                         <p><a href="{{ path('comment_edit', {'id': reply.id}) }}" class="ms-5">Modifier</a></p>
