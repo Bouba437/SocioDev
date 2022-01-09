@@ -4,14 +4,21 @@
 
 
 {% block body %}
-    <div class="container m-2 mx-auto">
+    <div class="block-medium">
         <h1>{{ article.title }}</h1>
-        {% for category in article.categories %}
-            <p>
-                <a href="{{ path('category_show', {'slug': category.slug}) }}">{{category.name | badge({'color': 'info', 'rounded': true})}}</a>
-            </p>
-        {% endfor %}
-        <img src="{{ vich_uploader_asset(article, 'imageFile') | imagine_filter('miniature') }}" alt="{{ article.title }}">
+        <div class="py-3">
+            {% for category in article.categories %}
+                <span class="badge bg-info">
+                    <a href="{{ path('category_show', {'slug': category.slug}) }}">{{category.name}}</a>
+                </span>
+            {% endfor %}
+        </div>
+        <div class="">
+            <small>
+                Publié le {{article.createdAt | date('d/m/Y à H:i')}} par {{article.author.fullName}}
+            </small>
+        </div>
+        <img class="my-4" src="{{ vich_uploader_asset(article, 'imageFile') | imagine_filter('large') }}" alt="{{ article.title }}">
         <br>
         {{ article.content | raw}}
         <div class="my-5">
@@ -52,6 +59,7 @@
         <div class="my-5" id="add-comment">
             {% if app.user %}
                 <h2>Ajouter un commentaire</h2>
+                {% include "partials/flashes.html.twig" %}
                 {{ form_start(commentForm) }}
                 {{ form_widget(commentForm) }}
                 <button type="submit" class="btn btn-primary">Commentez</button>

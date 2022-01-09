@@ -11,5 +11,7 @@ import './styles/app.scss';
 // You can specify which plugins you need
 import { Tooltip, Toast, Popover } from 'bootstrap';
 
+import './js/main.js'
+
 // start the Stimulus application
 import './bootstrap';

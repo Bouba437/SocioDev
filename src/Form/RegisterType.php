@@ -40,7 +40,7 @@ class RegisterType extends ApplicationType
             ->add('submit', SubmitType::class, [
                 'label' => "Je m'inscris",
                 'attr' => [
-                    'class' => "btn-block btn-success"
+                    'class' => "btn btn-primary"
                 ]
             ])
         ;

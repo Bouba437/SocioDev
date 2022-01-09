@@ -10,7 +10,7 @@
                 <div class="col-md-4 mb-3">
                     <div class="category-item text-center">
                         <i class="{{category.icon}} fa-2x d-block"></i>
-                        <a href="">{{category.name}}</a>
+                        <a href="{{ path('category_show', {'slug': category.slug}) }}">{{category.name}}</a>
                     </div>
                 </div>
             {% endfor %}
