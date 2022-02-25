@@ -17,6 +17,7 @@
         "friendsofsymfony/ckeditor-bundle": "^2.3",
         "helios-ag/fm-elfinder-bundle": "^12.1",
         "liip/imagine-bundle": "^2.7",
+        "mailjet/mailjet-apiv3-php": "^1.5",
         "phpdocumentor/reflection-docblock": "^5.3",
         "sensio/framework-extra-bundle": "^6.1",
         "symfony/asset": "5.3.*",

@@ -1,20 +1,83 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AccountController!{% endblock %}
+{% block title %}{{user.fullName}}{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ 'C:/Users/Bouba/Downloads/Realisations/sociodev/src/Controller/AccountController.php'|file_link(0) }}">src/Controller/AccountController.php</a></code></li>
-        <li>Your template at <code><a href="{{ 'C:/Users/Bouba/Downloads/Realisations/sociodev/templates/account/index.html.twig'|file_link(0) }}">templates/account/index.html.twig</a></code></li>
-    </ul>
-</div>
+    <div class="container">
+        <h2 class="py-4">Mon compte</h2>
+        {# <section style="background-color: #9de2ff;">
+            <div class="container py-5 h-100">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                    <div class="col-md-8">
+                        <div class="card" style="border-radius: 15px;">
+                            <div class="card-body p-4">
+                                <div class="d-flex text-black">
+                                    <div class="flex-shrink-0">
+                                        <img
+                                        src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
+                                        alt="Generic placeholder image"
+                                        class="img-fluid"
+                                        style="width: 180px; border-radius: 10px;"
+                                        />
+                                    </div>
+                                    <div class="flex-grow-1 ms-3">
+                                        <h5 class="mb-1">{{user.fullName}}</h5>
+                                        <p class="mb-2 pb-1" style="color: #2b2a2a;">
+                                        Date d'inscription : {{ user.createdAt | date("d-m-Y") }}
+                                        </p>
+                                        <div
+                                        class="d-flex justify-content-start rounded-3 p-2 mb-2"
+                                        style="background-color: #efefef;"
+                                        >
+                                        <div>
+                                            <p class="small text-muted mb-1">
+                                            Articles
+                                            </p>
+                                            <p class="mb-0">{{user.Articles | length}}</p>
+                                        </div>
+                                        <div class="px-3">
+                                            <p class="small text-muted mb-1">
+                                            Commentaires
+                                            </p>
+                                            <p class="mb-0">{{user.Comments | length}}</p>
+                                        </div>
+                                        </div>
+                                        {% if user is same as (app.user) %}
+                                            <div class="d-flex pt-1">
+                                                <button type="button" class="btn btn-outline-primary me-1 flex-grow-1">
+                                                    Chat
+                                                </button>
+                                                <button type="button" class="btn btn-primary flex-grow-1">
+                                                    Follow
+                                                </button>
+                                            </div>
+                                        {% endif %}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section> #}
+        <div class="row align-items-center mb-5">
+            <div class="col-md-3 text-center">
+                <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp" alt="{{user.fullName}}" class="avatar mb-3">
+                <br>
+                <span class="badge bg-primary">{{user.articles | length}} articles</span>
+                <span class="badge bg-secondary">{{user.comments | length}} commentaires</span>
+                <p>Prénom : {{ user.firstName }}</p>
+            </div>
+            <div class="col-md-9">
+                <h1>{{user.fullName}}</h1>
+                {% if user is same as(app.user) %}
+                    <div class="mt-3">
+                        <a href="{{path('account_profile')}}" class="btn btn-primary me-2 mb-2">Modifier mes informations</a>
+                        <a href="" class="btn btn-primary mb-2">Modifier mon mot de passe</a>
+                    </div>
+                {% endif %}
+                
+            </div>
+        </div>
+    </div>
 {% endblock %}

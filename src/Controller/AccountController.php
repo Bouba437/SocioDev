@@ -2,20 +2,21 @@
 
 namespace App\Controller;
 
-use App\Entity\PasswordUpdate;
+use DateTime;
 use App\Entity\User;
 use App\Form\AccountType;
-use App\Form\PasswordUpdateType;
 use App\Form\RegisterType;
-use DateTime;
-use Doctrine\ORM\EntityManagerInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Entity\PasswordUpdate;
+use App\Form\PasswordUpdateType;
 use Symfony\Component\Form\FormError;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Security\Http\Authentication\AuthenticationUtils;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AccountController extends AbstractController
 {
@@ -24,16 +25,6 @@ class AccountController extends AbstractController
     public function __construct(EntityManagerInterface $entityManager)
     {
         $this->entityManager = $entityManager;
-    }
-
-    /**
-     * @Route("/account", name="account")
-     */
-    public function index(): Response
-    {
-        return $this->render('account/index.html.twig', [
-            'controller_name' => 'AccountController',
-        ]);
     }
 
     /**
@@ -96,6 +87,22 @@ class AccountController extends AbstractController
      */
     public function logout() {
 
+    }
+
+    /**
+     * Permet d'afficher les informations du profil
+     * 
+     * @Route("/compte", name="account_index")
+     * @IsGranted("ROLE_USER")
+     *
+     * @return void
+     */
+    public function myAccount() {
+        $user = $this->getUser();
+
+        return $this->render('user/index.html.twig', [
+            'user' => $user,
+        ]);
     }
 
     /**

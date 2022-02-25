@@ -20,6 +20,16 @@ class ArticleRepository extends ServiceEntityRepository
         parent::__construct($registry, Article::class);
     }
 
+    public function findLastArticles() {
+        $query = $this->createQueryBuilder('a')
+            ->select('a')
+            ->orderBy('a.id', 'DESC')
+            ->setMaxResults(3);
+            return $query->getQuery()->getResult()
+
+        ;
+    }
+
     public function findWithSearch(Search $search) {
         $query= $this->createQueryBuilder('a')
             ->select('c', 'a')

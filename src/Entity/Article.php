@@ -104,6 +104,10 @@ class Article
         $this->createdAt = new DateTime();
     }
 
+    public function getExcerpt(int $start, int $end): string{
+        return substr($this->getContent(), $start, $end) . ' ... ';
+    }
+
     /**
      * Permet d'initialiser la date de modification d'un article
      * 
@@ -305,7 +309,7 @@ class Article
         return $this->coverImage;
     }
 
-    public function setCoverImage(string $coverImage): self
+    public function setCoverImage($coverImage): self
     {
         $this->coverImage = $coverImage;
 

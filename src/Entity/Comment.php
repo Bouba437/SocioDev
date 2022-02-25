@@ -59,7 +59,7 @@ class Comment
     private $parent;
 
     /**
-     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="parent")
+     * @ORM\OneToMany(targetEntity=Comment::class, mappedBy="parent", orphanRemoval=true)
      */
     private $replies;
 

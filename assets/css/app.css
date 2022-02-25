@@ -3,6 +3,10 @@ h1 {
     margin-bottom: 30px;
 }
 
+.container {
+    margin-top: 20px;
+}
+
 .block-small {
     max-width: 600px;
     margin: 0 auto;
@@ -58,4 +62,29 @@ h1 {
     background-color: #f4f8ff;
     padding: 20px 65px;
     margin-top: 7px;
+}
+
+section.presentation {
+    padding: 2em;
+    background-size: cover;
+    background-position: center center;
+}
+  /* div.presentation p, div.al-title p {
+    color: white;
+    text-shadow: 3px 3px 3px rgba(0, 0, 0, 0.5);
+  }
+div.al-title .btn {
+    margin-top: 2em;
+    font-size: 1.5em;
+    line-height: 1.5em;
+  } */
+
+.fw-bold {
+    font-weight: bold;
+}
+
+.avatar {
+    max-width: 128px;
+    max-height: 128px;
+    border-radius: 50%;
 }
